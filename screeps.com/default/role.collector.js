@@ -23,7 +23,7 @@ var roleCollector = {
         
         // retrieve target object from its id in memory and decide what to do
         var target = Game.getObjectById(creep.memory.target);
-        if(!target || target !== undefined) {
+        if(!target || target == undefined) {
             result = this.findTarget(creep);
         }
 
@@ -84,8 +84,12 @@ var roleCollector = {
                     var creepsInRoom = _.filter(Game.creeps, c => exclude.indexOf(c.id) < 0 && c.room.name === creep.room.name);
                     var linkFillers =  _.filter(creepsInRoom, c => c.memory.role === 'linkFiller' && c.room.name === creep.room.name);
                     
-                    var lowCreeps = _.filter(creepsInRoom, c => ((c.memory.role === 'upgrader' && !linkFillers.length > 0) || (c.memory.role === 'builder' && c.memory.idle === false)) && c.carry.energy < (c.carryCapacity / 3));
-                    var priorityCreeps = _.filter(lowCreeps, c => c.carry.energy === 0);
+                    var lowCreeps = _.filter(creepsInRoom, c => ((c.memory.role === 'builder' && c.memory.idle === false) || (c.memory.role === 'upgrader' && !linkFillers.length > 0)) && c.carry.energy < (c.carryCapacity / 3));
+                    if(creep.room.controller.ticksToDowngrade < 5000) {
+                        var priorityCreeps = _.filter(creepsInRoom, c => c.memory.role === 'builder');
+                    } else {
+                        var priorityCreeps = _.filter(lowCreeps, c => c.carry.energy === 0);
+                    }
                     
                     if(priorityCreeps.length > 0) {
                         var target = creep.pos.findClosestByPath(priorityCreeps);
@@ -207,7 +211,7 @@ var roleCollector = {
     	var result;
         
         if(creep.memory.lastPos !== undefined) {
-        	if(creep.pos.x === creep.memory.lastPos.x && creep.pos.y === creep.memory.lastPos.y) {
+        	if((creep.pos.x === creep.memory.lastPos.x && creep.pos.y === creep.memory.lastPos.y) && creep.fatigue === 0) {
         		this.recalculatePath(creep);
         	}
         }

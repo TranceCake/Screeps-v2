@@ -1,26 +1,26 @@
 global.log = require('prototype.log');
 
 var roleMiner = require('role.miner');
-// var roleCollector = require('role.collector');
-// var roleBuilder = require('role.builder');
-// var roleUpgrader = require('role.upgrader');
+var roleCollector = require('role.collector');
+var roleBuilder = require('role.builder');
+var roleUpgrader = require('role.upgrader');
 var spawnManager = require('manager.spawn');
 var logisticsManager = require('manager.logistics');
-// var roleDefender = require('role.defender');
-// var tower = require('tower');
-// var link = require('link');
-// var terminal = require('terminal');
-// var roleLinkFiller = require('role.linkFiller');
-// var roleAttacker = require('role.attacker');
-// var roleClaimer = require('role.claimer');
-// var roleRemoteBuilder = require('role.remoteBuilder');
-// var roleDrainer = require('role.drainer');
-// var roleTank = require('role.tank');
-// var roleRaider = require('role.raider');
-// var roleKeeper = require('role.peaceKeeper');
-// var roleRemoteMiner = require('role.remoteMiner');
-// var roleRemoteCollector = require('role.remoteCollector');
-// var roleMineralMiner = require('role.MineralMiner');
+var roleDefender = require('role.defender');
+var tower = require('tower');
+var link = require('link');
+var terminal = require('terminal');
+var roleLinkFiller = require('role.linkFiller');
+var roleAttacker = require('role.attacker');
+var roleClaimer = require('role.claimer');
+var roleRemoteBuilder = require('role.remoteBuilder');
+var roleDrainer = require('role.drainer');
+var roleTank = require('role.tank');
+var roleRaider = require('role.raider');
+var roleKeeper = require('role.peaceKeeper');
+var roleRemoteMiner = require('role.remoteMiner');
+var roleRemoteCollector = require('role.remoteCollector');
+var roleMineralMiner = require('role.MineralMiner');
 
 module.exports.loop = function () {
 
@@ -79,7 +79,7 @@ module.exports.loop = function () {
             if(!creep.spawning) {
                 if(creep.memory.role == 'miner') {
                     roleMiner.run(creep);
-                } /*else if(creep.memory.role == 'collector') {
+                } else if(creep.memory.role == 'collector') {
                     roleCollector.run(creep);
                 } else if(creep.memory.role == 'builder') {
                     roleBuilder.run(creep);
@@ -109,12 +109,12 @@ module.exports.loop = function () {
                     roleRemoteCollector.run(creep);
                 } else if(creep.memory.role == 'mineralMiner') {
                     roleMineralMiner.run(creep);
-                }*/
+                }
             }
         } else {
             if(creep.memory.role == 'miner') {
                 roleMiner.run(creep);
-            } /*else if(creep.memory.role == 'collector') {
+            } else if(creep.memory.role == 'collector') {
                 roleCollector.run(creep);
             } else if(creep.memory.role == 'defender') {
                 roleDefender.run(creep);
@@ -138,7 +138,7 @@ module.exports.loop = function () {
                 roleSpawnBuilder.run(creep);
             } else if(creep.memory.role == 'upgrader') {
                 roleUpgrader.run(creep);
-            }*/
+            }
         }
     }
     

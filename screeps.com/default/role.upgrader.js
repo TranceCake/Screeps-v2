@@ -58,17 +58,16 @@ var roleUpgrader = {
     },
     
     moveToTarget: function(creep) {
-        if(creep.upgradeController(creep.room.controller) === ERR_NOT_IN_RANGE) {
-            var flag = Game.flags[creep.memory.flag];
+        var flag = Game.flags[creep.memory.flag];
             
-            if(flag !== undefined) {
-                return creep.moveTo(flag);
-            } else {
-                return creep.moveTo(creep.room.controller);
-            }
+        if(flag !== undefined) {
+            return creep.moveTo(flag);
         } else {
-            return creep.upgradeController(creep.room.controller);
-            
+            if(creep.pos.getRangeTo(creep.room.controller) > 3) {
+                return creep.moveTo(creep.room.controller);
+            } else {
+                return creep.upgradeController(creep.room.controller);
+            }
         }
     }
 };

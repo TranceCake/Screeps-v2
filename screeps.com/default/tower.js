@@ -1,7 +1,7 @@
 var tower = {
     run: function(tower) {
         var hostileAttackCreeps = tower.room.find(FIND_HOSTILE_CREEPS, { 
-            filter: (c) => (c.getActiveBodyparts(ATTACK) > 0 || c.getActiveBodyparts(RANGED_ATTACK) > 0) && !(c.owner.username === 'Remco' || c.owner.username === 'Mordox' || c.owner.username === '0xDEADFEED' || c.owner.username === 'Nisou' || c.owner.username === 'kormac' || c.owner.username === 'Enrico')
+            filter: (c) => (c.getActiveBodyparts(ATTACK) > 0 || c.getActiveBodyparts(RANGED_ATTACK) > 0) && !(c.owner.username === '' || c.owner.username === 'Mordox' || c.owner.username === '0xDEADFEED' || c.owner.username === 'Nisou' || c.owner.username === 'kormac' || c.owner.username === 'Enrico')
         });
         var targets = this.getTargets(hostileAttackCreeps, tower , 4);
         var healers = _.filter(tower.room.find(FIND_HOSTILE_CREEPS), c => c.getActiveBodyparts(HEAL) > 0);
@@ -110,6 +110,10 @@ var tower = {
     
     getTargets: function(hCreeps, tower, rng = 4) {
         var targets = [];
+        // hCreeps = _.filter(hCreeps, c => c.getActiveBodyparts(ATTACK) > 0 || 
+        //         c.getActiveBodyparts(RANGED_ATTACK) > 0 || 
+        //         c.getActiveBodyparts(HEAL) > 0 || 
+        //         c.getActiveBodyparts(WORK) > 0);
         
         for(let h of hCreeps) {
             var x = h.pos.x;
